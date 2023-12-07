@@ -162,13 +162,13 @@ public class Application {
         List<Product> productsFromFile = new ArrayList<>();
 
         for (int i = 0; i < strings.length; i += 3) {
-            Double toPrint = Double.parseDouble(strings[i += 2]);
-            System.out.println(toPrint);
-            //Product product = new Product(strings[i], strings[i += 1], Double.parseDouble(strings[i += 2]));
-            //productsFromFile.add(product);
+         //   Double toPrint = Double.parseDouble(strings[i += 2]);
+           // System.out.println(toPrint);
+            Product product = new Product(strings[i], strings[i + 1], Double.parseDouble(strings[i + 2]));
+            productsFromFile.add(product);
         }
 
-        // productsFromFile.forEach(System.out::println);
+         productsFromFile.forEach(System.out::println);
     }
 }
 
