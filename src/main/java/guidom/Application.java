@@ -1,5 +1,6 @@
 package guidom;
 
+import com.github.javafaker.Faker;
 import guidom.entities.Category;
 import guidom.entities.Customer;
 import guidom.entities.Order;
@@ -21,9 +22,13 @@ public class Application {
             Random rnd = new Random();
             return rnd.nextInt(1, 200);
         };
-        Supplier<Product> booksSupplier = () -> new Product("Libro", Category.Books.toString(), randomNumbers.get());
-        Supplier<Product> babyProdsSupplier = () -> new Product("GiocoX", Category.Baby.toString(), randomNumbers.get());
-        Supplier<Product> boysProdsSupplier = () -> new Product("Camicia", Category.Boys.toString(), randomNumbers.get());
+
+        Faker faker = new Faker(Locale.ITALY);
+
+        Supplier<Product> booksSupplier = () -> new Product(faker.book().title(), Category.Books.toString(), randomNumbers.get());
+        Supplier<Product> babyProdsSupplier = () -> new Product(faker.pokemon().name(), Category.Baby.toString(), randomNumbers.get());
+        Supplier<Product> boysProdsSupplier = () -> new Product(faker.commerce().productName(), Category.Boys.toString(), randomNumbers.get());
+
         // CLIENTI
         Supplier<Customer> customerSupplier = () -> new Customer("Pippo", 1);
         Supplier<Customer> customer2Supplier = () -> new Customer("Franco", 2);
@@ -162,8 +167,6 @@ public class Application {
         List<Product> productsFromFile = new ArrayList<>();
 
         for (int i = 0; i < strings.length; i += 3) {
-         //   Double toPrint = Double.parseDouble(strings[i += 2]);
-           // System.out.println(toPrint);
             Product product = new Product(strings[i], strings[i + 1], Double.parseDouble(strings[i + 2]));
             productsFromFile.add(product);
         }
